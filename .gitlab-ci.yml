@@ -1,0 +1,16 @@
+stages:
+  - release
+
+docker:
+  stage: release
+  only: ['main', 'tags']
+  services:
+    - docker:dind
+  image: jdrouet/docker-with-buildx:stable
+  before_script:
+    - apk --no-cache add make git
+  script:
+    - git clone --depth 1 --single-branch https://github.com/ether/etherpad-lite.git
+    - make login docker
+  tags:
+    - docker
