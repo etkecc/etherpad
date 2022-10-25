@@ -20,4 +20,4 @@ login:
 # docker build
 docker:
 	docker buildx create --use
-	docker buildx build --platform linux/arm/v7,linux/arm64/v8,linux/amd64 --push -t ${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG} --build-arg ETHERPAD_PLUGINS="$(PLUGINS)" --build-arg INSTALL_SOFFICE=true etherpad-lite
+	docker buildx build --platform linux/arm64/v8,linux/amd64 --push -t ${CI_REGISTRY_IMAGE}:${CI_COMMIT_TAG} --build-arg ETHERPAD_PLUGINS="$(PLUGINS)" --build-arg INSTALL_SOFFICE=true etherpad-lite
