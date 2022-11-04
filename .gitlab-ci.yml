@@ -13,7 +13,7 @@ docker:
     - apk --no-cache add git jq
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - git clone --depth 1 --single-branch -b $BRANCH https://github.com/ether/etherpad-lite.git
-    - export VERSION=${VERSION:-$(cat etherpad-lite/src/package.json | jq -rM .version)}
+    - export VERSION=$(cat etherpad-lite/src/package.json | jq -rM .version)
   script:
     - docker build -t $CI_REGISTRY_IMAGE -t $CI_REGISTRY_IMAGE:$VERSION --build-arg ETHERPAD_PLUGINS="$PLUGINS" --build-arg INSTALL_SOFFICE=true etherpad-lite
     - if [[ "$BRANCH" == "develop" ]]; then docker push $CI_REGISTRY_IMAGE; fi
