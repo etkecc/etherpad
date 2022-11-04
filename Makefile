@@ -1,4 +1,4 @@
-PLUGINS = ep_font_size ep_font_family ep_font_color ep_spellcheck ep_table_of_contents ep_subscript_and_superscript ep_mammoth ep_print ep_comments_page ep_embedded_hyperlinks2 ep_adminpads2
+PLUGINS = ep_font_size ep_font_family ep_font_color ep_spellcheck ep_table_of_contents ep_subscript_and_superscript ep_mammoth ep_print ep_comments_page ep_embedded_hyperlinks2 ep_adminpads2 ep_align ep_headings2 ep_cursortrace ep_markdown ep_set_title_on_pad ep_embedmedia ep_themes ep_rewrite_share_paths
 ### CI vars
 CI_LOGIN_COMMAND = @echo "Not a CI, skip login"
 CI_REGISTRY_IMAGE ?= registry.gitlab.com/etke.cc/etherpad
