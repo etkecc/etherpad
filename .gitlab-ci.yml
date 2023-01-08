@@ -8,6 +8,7 @@ docker:
   variables:
     BRANCH: develop
     PLUGINS: ep_font_size ep_font_family ep_font_color ep_spellcheck ep_table_of_contents ep_subscript_and_superscript ep_mammoth ep_print ep_comments_page ep_embedded_hyperlinks2 ep_adminpads2 ep_align ep_headings2 ep_cursortrace ep_markdown ep_set_title_on_pad ep_embedmedia ep_themes ep_rewrite_share_paths
+    REGISTRY_IMAGE: registry.etke.cc/etke.cc/etherpad
   image: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/jdrouet/docker-with-buildx:stable
   before_script:
     - apk --no-cache add git jq
@@ -16,8 +17,9 @@ docker:
     - export VERSION=$(cat etherpad-lite/src/package.json | jq -rM .version)
     - sed -i 's/+libreoffice/+libreoffice libreoffice-java-common default-jre/g' etherpad-lite/Dockerfile
   script:
-    - docker build -t $CI_REGISTRY_IMAGE -t $CI_REGISTRY_IMAGE:$VERSION --build-arg ETHERPAD_PLUGINS="$PLUGINS" --build-arg INSTALL_SOFFICE=true etherpad-lite
-    - if [[ "$BRANCH" == "develop" ]]; then docker push $CI_REGISTRY_IMAGE; fi
+    - docker build -t $REGISTRY_IMAGE -t $REGISTRY_IMAGE:$VERSION -t $CI_REGISTRY_IMAGE -t $CI_REGISTRY_IMAGE:$VERSION --build-arg ETHERPAD_PLUGINS="$PLUGINS" --build-arg INSTALL_SOFFICE=true etherpad-lite
+    - if [[ "$BRANCH" == "develop" ]]; then docker push $REGISTRY_IMAGE; docker push $CI_REGISTRY_IMAGE; fi
+    - docker push $REGISTRY_IMAGE:$VERSION
     - docker push $CI_REGISTRY_IMAGE:$VERSION
   tags:
     - docker
