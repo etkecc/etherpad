@@ -35,7 +35,6 @@ jobs:
             type=raw,value=latest,enable=${{ github.ref_name == 'main' }}
             type=raw,value=${{ env.app_version }},enable=${{ github.ref_name == 'main' }}
       - name: Checkout Etherpad
-        container: git
         run: |
           wget https://github.com/ether/etherpad-lite/archive/refs/tags/v${{ env.app_version }}.tar.gz
           tar -xf ${{ env.app_version }}.tar.gz
