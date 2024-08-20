@@ -36,9 +36,7 @@ jobs:
             type=raw,value=${{ env.app_version }},enable=${{ github.ref_name == 'main' }}
       - name: Checkout Etherpad
         run: |
-          wget https://github.com/ether/etherpad-lite/archive/refs/tags/v${{ env.app_version }}.tar.gz
-          tar -xf v${{ env.app_version }}.tar.gz
-          mv etherpad-lite-${{ env.app_version }} etherpad-lite
+          git clone -b ${{ env.app_version }} --depth 1 https://github.com/ether/etherpad-lite.git
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
