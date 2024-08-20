@@ -37,8 +37,8 @@ jobs:
       - name: Checkout Etherpad
         run: |
           wget https://github.com/ether/etherpad-lite/archive/refs/tags/v${{ env.app_version }}.tar.gz
-          tar -xf ${{ env.app_version }}.tar.gz
-          mv ${{ env.app_version }} etherpad-lite
+          tar -xf $v{{ env.app_version }}.tar.gz
+          mv v${{ env.app_version }} etherpad-lite
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
